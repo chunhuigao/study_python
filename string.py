@@ -52,3 +52,14 @@ print(sorted(s12))
 # 字符串的反转
 s13 = s2[::-1]
 print(s13)
+
+# 字符串的去空格
+s14 = ' hello world '
+print(s14.strip())
+print(s14.lstrip())
+print(s14.rstrip())
+
+# 字符串的连接
+s15 = ''.join(['hello', 'world'])
+print(s15)
+
