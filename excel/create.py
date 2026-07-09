@@ -1,16 +1,21 @@
-from openpyxl import Workbook
+from openpyxl import Workbook,load_workbook
 
-# 创建一个Workbook对象，这将会创建一个Excel文件
-wb = Workbook()
+def create_excel(filename: str, data: list[list[str]]) -> None:
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "MySheet"
+    for row in data:
+        ws.append(row)
+    wb.save(filename)
+    wb.close()
 
-# 激活当前工作表
-ws = wb.active
-
-# 改变工作表的标题
-ws.title = "MySheet"
-
-# 在单元格A1中写入数据
-ws['A1'] = "Hello, World!"
-
-# 保存Excel文件
-wb.save("example.xlsx")
+def read_excel(filename: str) -> list[list[str]]:
+    wb = load_workbook(filename)
+    ws = wb.active
+    data = []
+    for row in ws.iter_rows(values_only=True):
+        data.append(row)
+    wb.close()
+    return data
+ss = read_excel("example.xlsx")
+print(ss)
