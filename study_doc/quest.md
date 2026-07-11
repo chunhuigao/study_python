@@ -158,3 +158,40 @@ MRO 是多继承中方法查找的顺序，Python 3 使用 C3 线性化算法，
 保证子类优先、声明顺序一致、单调性。
 super() 不是调用父类，而是按 MRO 调用下一个类的方法，
 这使得多继承中每个类只被初始化一次
+
+## 生成多继承代码
+
+```python
+class A:
+    def __init__(self):
+        print("A")
+        self.a = 10
+        super().__init__()
+    def say(self):
+        print("A say",self.a)
+class B:
+    def __init__(self):
+        print("B")
+        self.b = 20
+        super().__init__()
+
+    def say(self):
+        print("B say",self.b)
+class D:
+    def __init__(self):
+        print("B")
+        self.d = 30
+    def say(self):
+        print("D say",self.d)
+
+class C(A, B, D):
+    def __init__(self):
+        super().__init__()
+        print("C")
+    def say(self):
+        print("C say",self.a,self.b,self.d)
+
+cc = C()
+cc.say()
+
+```
