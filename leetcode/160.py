@@ -6,3 +6,6 @@ class Solution:
             a = a.next if a else headB
             b = b.next if b else headA
         return a
+    
+
+
