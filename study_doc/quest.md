@@ -195,3 +195,40 @@ cc = C()
 cc.say()
 
 ```
+
+# Python 如何实现单例模式？
+
+## 模块导入
+
+```python
+# singleton.py
+class _Singleton:
+    def __init__(self):
+        self.name = "唯一实例"
+
+instance = _Singleton()
+
+# 使用
+from singleton import instance   # 模块只加载一次，instance 是全局唯一的
+```
+
+## new 重写
+
+有点事方便，缺点是多线程并发下会创建多个实例，线程不安全
+
+```python
+class Singleton:
+    _instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if not cls._instance:
+            cls._instance = super().__new__(cls, *args, **kwargs)
+        return cls._instance
+
+# 测试
+s1 = Singleton()
+s2 = Singleton()
+print(s1 is s2)  # True
+```
+
+# 如何实现 LRU 缓存？
